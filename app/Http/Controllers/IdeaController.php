@@ -11,13 +11,13 @@ class IdeaController extends Controller
     {
         // Validate the request
         request()->validate([
-            'idea' => 'required|min:5|max:255'
+            'content' => 'required|min:5|max:255'
 
         ]);
 
         // Validate the request
         $idea = Idea::create([
-            'content' => request()->get('idea', '')
+            'content' => request()->get('content', '')
         ]);
 
         // Redirect to the dashboard
@@ -33,6 +33,27 @@ class IdeaController extends Controller
         return view('ideas.show', [
             'idea' => $idea
         ]);
+    }
+
+    public function edit(Idea $idea)
+    {
+        $editing = true;
+
+        // Return the idea to the view
+        return view('ideas.show', compact('idea', 'editing'));
+    }
+
+    public function update(Idea $idea)
+    {
+        request()->validate([
+            'content' => 'required|min:5|max:255'
+        ]);
+
+        $idea->content = request()->get('content', '');
+        $idea->save();
+
+        // Return the idea to the view
+        return redirect()->route('ideas.show', $idea->id)->with('success', 'Idea updated successfully!');
     }
 
     public function destroy($id)
