@@ -24,6 +24,17 @@ class IdeaController extends Controller
         return redirect()->route('dashboard')->with('success', 'Idea created successfully!');
     }
 
+    public function show($id)
+    {
+        // Find the idea by its ID
+        $idea = Idea::where('id', $id)->firstOrFail();
+
+        // Return the idea to the view
+        return view('ideas.show', [
+            'idea' => $idea
+        ]);
+    }
+
     public function destroy($id)
     {
         // Find the idea by its ID
