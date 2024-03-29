@@ -14,4 +14,10 @@ class Idea extends Model
         'content',
         'like',
     ];
+
+    // The comments method defines a one-to-many relationship between the Idea and Comment models.
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
