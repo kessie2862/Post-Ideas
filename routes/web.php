@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\ProfileController;
@@ -15,5 +16,7 @@ Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit'])->name('ideas.e
 Route::put('/ideas/{idea}', [IdeaController::class, 'update'])->name('ideas.update');
 
 Route::post('/ideas', [IdeaController::class, 'store'])->name('idea.store'); // Using named routes
+
+Route::post('/ideas/{idea}/comments', [CommentController::class, 'store'])->name('ideas.comments.store');
 
 Route::delete('/ideas/{id}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
